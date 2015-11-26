@@ -46,11 +46,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     func setTextProperties() {
-        
-        // Initial value for textfields.
-        topTextField.text = "TOP";
-        bottomTextField.text = "BOTTOM"
-        
+        setDefaultTextValues()
         let memeTextAttributes = [
             NSStrokeColorAttributeName: UIColor.blackColor(),
             NSForegroundColorAttributeName : UIColor.whiteColor(),
@@ -61,6 +57,11 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         topTextField.textAlignment = NSTextAlignment.Center
         bottomTextField.defaultTextAttributes = memeTextAttributes
         bottomTextField.textAlignment = NSTextAlignment.Center
+    }
+    
+    func setDefaultTextValues() {
+        topTextField.text = "TOP";
+        bottomTextField.text = "BOTTOM"
     }
     
     override func prefersStatusBarHidden() -> Bool {
@@ -89,28 +90,25 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             if (completed == true) {
                 self.save()
                 self.dismissViewControllerAnimated(true, completion: nil)
+                self.setDefaultTextValues()
             }
         }
     }
     
     @IBAction func cancel(sender: UIBarButtonItem) {
-        // Initial value for textfields.
-        
-        topTextField.text = "TOP";
-        bottomTextField.text = "BOTTOM"
-        
+        setDefaultTextValues()
         imageView.image = nil
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-//            imageView.contentMode = .ScaleAspectFit
-//            imageView.image = image
-            cropAnImage(image)
+            imageView.contentMode = .ScaleAspectFit
+            imageView.image = image
+//            cropAnImage(image)
             dismissViewControllerAnimated(true, completion: nil)
         }
     }
-    
+    // Code for cropping the image will be used in part 2 of the project.
     func cropAnImage(let image: UIImage) {
         let croprect = CGRectMake(image.size.width/4, image.size.height/4, image.size.width/2, image.size.height/2)
         let imageRef = CGImageCreateWithImageInRect(image.CGImage, croprect)
