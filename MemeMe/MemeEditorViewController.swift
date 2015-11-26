@@ -18,6 +18,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var toolBar: UIToolbar!
+    @IBOutlet weak var fixedSpaceLeft: UIBarButtonItem!
+    @IBOutlet weak var fixedSpaceMiddle: UIBarButtonItem!
+    @IBOutlet weak var fixedSpaceRight: UIBarButtonItem!
     
     var imagePicker: UIImagePickerController!
     let textFieldDelegate = memeTextFieldDelegate()
@@ -29,6 +32,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         topTextField.delegate = textFieldDelegate
         bottomTextField.delegate = textFieldDelegate
         setTextProperties()
+        setBarButtonsOnToolBar()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -43,6 +47,15 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         self.unsubscribeFromKeyboardNotifications()
+    }
+    
+    func setBarButtonsOnToolBar() {
+        let screenRect = UIScreen.mainScreen().bounds
+        let screenWidth = screenRect.size.width;
+        
+        fixedSpaceLeft.width = screenWidth/3
+        fixedSpaceRight.width = screenWidth/3
+        fixedSpaceMiddle.width = 25.0
     }
     
     func setTextProperties() {
@@ -118,8 +131,10 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     func save() {
         let memedImg = generateMemedImage()
-        let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: imageView.image!, memedImage: memedImg)
-        print(meme)
+        if ((topTextField.text != nil) && (bottomTextField.text != nil) && (imageView.image != nil)) {
+            let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: imageView.image!, memedImage: memedImg)
+            print(meme)
+        }
     }
     
     func generateMemedImage() -> UIImage

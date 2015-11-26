@@ -26,16 +26,19 @@
                                 <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                                 <animations/>
                                 <items>
+                                    <barButtonItem width="90" style="plain" systemItem="fixedSpace" id="wOP-8x-3wl"/>
                                     <barButtonItem title="Album" id="4TM-HH-DTV">
                                         <connections>
                                             <action selector="pickImageFromAlbum:" destination="BYZ-38-t0r" id="ra7-Mi-2rY"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem width="61" style="plain" systemItem="fixedSpace" id="abS-xw-DXz"/>
                                     <barButtonItem systemItem="camera" id="GKn-fS-WP5">
                                         <connections>
                                             <action selector="launchCamera:" destination="BYZ-38-t0r" id="pih-qp-CBK"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem width="342" style="plain" systemItem="fixedSpace" id="Lvp-DX-nY0"/>
                                 </items>
                             </toolbar>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5B1-Go-yyh">
@@ -105,6 +108,9 @@
                         <outlet property="album" destination="4TM-HH-DTV" id="arJ-2f-iKz"/>
                         <outlet property="bottomTextField" destination="V5s-RJ-7CE" id="yN9-M3-3nE"/>
                         <outlet property="camera" destination="GKn-fS-WP5" id="rzI-a3-7CD"/>
+                        <outlet property="fixedSpaceLeft" destination="wOP-8x-3wl" id="YCC-XE-6hQ"/>
+                        <outlet property="fixedSpaceMiddle" destination="abS-xw-DXz" id="RhG-Zb-QrB"/>
+                        <outlet property="fixedSpaceRight" destination="Lvp-DX-nY0" id="NJ5-Mc-hgq"/>
                         <outlet property="imageView" destination="5B1-Go-yyh" id="yOX-aE-Zce"/>
                         <outlet property="navigationBar" destination="z6U-av-ekn" id="H5Z-cf-BEW"/>
                         <outlet property="shareButton" destination="X5M-QD-No5" id="aAv-L4-MWm"/>

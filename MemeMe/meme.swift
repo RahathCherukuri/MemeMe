@@ -16,7 +16,7 @@ struct Meme {
     var memedImage: UIImage
     
     //TODO: Check for the image and text to be present.
-    init?(topText: String, bottomText:String, originalImage:UIImage, memedImage:UIImage) {
+    init(topText: String, bottomText:String, originalImage:UIImage, memedImage:UIImage) {
         self.topText = topText
         self.bottomText = bottomText
         self.originalImage = originalImage
