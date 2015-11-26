@@ -23,7 +23,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var fixedSpaceRight: UIBarButtonItem!
     
     var imagePicker: UIImagePickerController!
-    let textFieldDelegate = memeTextFieldDelegate()
+    let textFieldDelegate = MemeTextFieldDelegate()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +31,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         imagePicker.delegate = self
         topTextField.delegate = textFieldDelegate
         bottomTextField.delegate = textFieldDelegate
-        setTextProperties()
+        setTextProperties(topTextField)
+        setTextProperties(bottomTextField)
         setBarButtonsOnToolBar()
     }
     
@@ -58,23 +59,24 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         fixedSpaceMiddle.width = 25.0
     }
     
-    func setTextProperties() {
-        setDefaultTextValues()
+    func setTextProperties(textField: UITextField) {
+        setDefaultTextValues(textField)
         let memeTextAttributes = [
             NSStrokeColorAttributeName: UIColor.blackColor(),
             NSForegroundColorAttributeName : UIColor.whiteColor(),
             NSFontAttributeName : UIFont(name: "Impact", size: 40)!,
             NSStrokeWidthAttributeName: -2.0
         ]
-        topTextField.defaultTextAttributes = memeTextAttributes
-        topTextField.textAlignment = NSTextAlignment.Center
-        bottomTextField.defaultTextAttributes = memeTextAttributes
-        bottomTextField.textAlignment = NSTextAlignment.Center
+        textField.defaultTextAttributes = memeTextAttributes
+        textField.textAlignment = NSTextAlignment.Center
     }
     
-    func setDefaultTextValues() {
-        topTextField.text = "TOP";
-        bottomTextField.text = "BOTTOM"
+    func setDefaultTextValues(textField: UITextField) {
+        if (textField == topTextField) {
+            textField.text = "TOP"
+        } else if (textField == bottomTextField) {
+            textField.text = "BOTTOM"
+        }
     }
     
     override func prefersStatusBarHidden() -> Bool {
@@ -103,13 +105,15 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             if completed {
                 self.save()
                 self.dismissViewControllerAnimated(true, completion: nil)
-                self.setDefaultTextValues()
+                self.setDefaultTextValues(self.topTextField)
+                self.setDefaultTextValues(self.bottomTextField)
             }
         }
     }
     
     @IBAction func cancel(sender: UIBarButtonItem) {
-        setDefaultTextValues()
+        setDefaultTextValues(topTextField)
+        setDefaultTextValues(bottomTextField)
         imageView.image = nil
     }
     
@@ -167,12 +171,12 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     func keyboardWillShow(notification: NSNotification) {
         if(bottomTextField.isFirstResponder()) {
-            self.view.frame.origin.y -= getKeyboardHeight(notification)
+            view.frame.origin.y = -getKeyboardHeight(notification)
         }
     }
     
     func keyboardWillHide(notification: NSNotification) {
-            self.view.frame.origin.y = 0
+            view.frame.origin.y = 0
     }
     
     func getKeyboardHeight(notification: NSNotification) -> CGFloat {

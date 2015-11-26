@@ -8,7 +8,7 @@
 
 import UIKit
 
-class memeTextFieldDelegate: NSObject, UITextFieldDelegate {
+class MemeTextFieldDelegate: NSObject, UITextFieldDelegate {
     
     func textField (textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         textField.text? = textField.text!.uppercaseString
