@@ -37,7 +37,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.subscribeToKeyboardNotifications()
+        subscribeToKeyboardNotifications()
         if (!UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)) {
             camera.enabled = false
             shareButton.enabled = true
@@ -46,7 +46,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        self.unsubscribeFromKeyboardNotifications()
+        unsubscribeFromKeyboardNotifications()
     }
     
     func setBarButtonsOnToolBar() {
@@ -83,12 +83,12 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 
     @IBAction func pickImageFromAlbum(sender: UIBarButtonItem) {
         imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        self.presentViewController(imagePicker, animated: true, completion: nil)
+        presentViewController(imagePicker, animated: true, completion: nil)
     }
 
     @IBAction func launchCamera(sender: UIBarButtonItem) {
         imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
-        self.presentViewController(imagePicker, animated: true, completion: nil)
+        presentViewController(imagePicker, animated: true, completion: nil)
     }
     
     @IBAction func shareButtonAction(sender: UIBarButtonItem) {
@@ -100,7 +100,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             }
         controller.completionWithItemsHandler = {
             (activity: String?, completed: Bool, items: [AnyObject]?, error: NSError?) -> Void in
-            if (completed == true) {
+            if completed {
                 self.save()
                 self.dismissViewControllerAnimated(true, completion: nil)
                 self.setDefaultTextValues()
@@ -172,9 +172,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     func keyboardWillHide(notification: NSNotification) {
-        if(bottomTextField.isFirstResponder()) {
-            self.view.frame.origin.y += getKeyboardHeight(notification)
-        }
+            self.view.frame.origin.y = 0
     }
     
     func getKeyboardHeight(notification: NSNotification) -> CGFloat {
