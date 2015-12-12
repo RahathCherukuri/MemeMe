@@ -112,9 +112,11 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     @IBAction func cancel(sender: UIBarButtonItem) {
-        setDefaultTextValues(topTextField)
-        setDefaultTextValues(bottomTextField)
-        imageView.image = nil
+//        setDefaultTextValues(topTextField)
+//        setDefaultTextValues(bottomTextField)
+//        imageView.image = nil
+        
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
@@ -141,6 +143,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             let object = UIApplication.sharedApplication().delegate
             let appDelegate = object as! AppDelegate
             appDelegate.memes.append(meme)
+            print("Memes array: ", appDelegate.memes)
         }
     }
     
