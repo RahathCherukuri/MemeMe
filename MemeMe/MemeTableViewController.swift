@@ -31,9 +31,7 @@ class MemeTableViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let object = UIApplication.sharedApplication().delegate
         let appDelegate = object as! AppDelegate
-        let count = appDelegate.memes.count;
-        print("count: ", count)
-        return count
+        return appDelegate.memes.count;
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
