@@ -12,13 +12,7 @@ class MemeCollectionViewController: UIViewController, UICollectionViewDelegate, 
 
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var memeCollectionView: UICollectionView!
-    
-    var memes: [Meme]! {
-        let object = UIApplication.sharedApplication().delegate
-        let appDelegate = object as! AppDelegate
-        return appDelegate.memes
-    }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         potraitOrientation();
@@ -42,20 +36,20 @@ class MemeCollectionViewController: UIViewController, UICollectionViewDelegate, 
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let object = UIApplication.sharedApplication().delegate
-        let appDelegate = object as! AppDelegate
-        return appDelegate.memes.count;
+        return Meme.memes.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("memeCollectionViewCell", forIndexPath: indexPath) as! MemeCollectionViewCell
-        let meme = memes[indexPath.row]
+        let meme = Meme.memes[indexPath.row]
         cell.memeImageView?.image = meme.memedImage
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        
+        let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
+        detailController.meme = Meme.memes[indexPath.row]
+        self.navigationController!.pushViewController(detailController, animated: true)
     }
 
 }

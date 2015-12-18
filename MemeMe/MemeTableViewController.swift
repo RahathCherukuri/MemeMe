@@ -12,12 +12,6 @@ class MemeTableViewController: UIViewController, UITableViewDelegate, UITableVie
     
     @IBOutlet weak var memeTableView: UITableView!
     
-    var memes: [Meme]! {
-        let object = UIApplication.sharedApplication().delegate
-        let appDelegate = object as! AppDelegate
-        return appDelegate.memes
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -29,21 +23,32 @@ class MemeTableViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let object = UIApplication.sharedApplication().delegate
-        let appDelegate = object as! AppDelegate
-        return appDelegate.memes.count;
+        return Meme.memes.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: MemeTableViewCell = tableView.dequeueReusableCellWithIdentifier("memeCell") as! MemeTableViewCell
-        let meme = memes[indexPath.row]
+        let meme = Meme.memes[indexPath.row]
         cell.topLabel.text = meme.topText
         cell.bottomLabel.text = meme.bottomText
         cell.memeImageView.image = meme.memedImage
         return cell
     }
     
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            Meme.memes.removeAtIndex(indexPath.row)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+        }
+    }
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
+        detailController.meme = Meme.memes[indexPath.row]
+        self.navigationController!.pushViewController(detailController, animated: true)
     }
 }
