@@ -24,6 +24,7 @@ class MemeTableViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Meme.memes.count
+//        return 2
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -31,7 +32,9 @@ class MemeTableViewController: UIViewController, UITableViewDelegate, UITableVie
         let meme = Meme.memes[indexPath.row]
         cell.topLabel.text = meme.topText
         cell.bottomLabel.text = meme.bottomText
-        cell.memeImageView.image = meme.memedImage
+        cell.memeImageView.image = meme.originalImage
+        cell.imageViewTopLabel.text = meme.topText
+        cell.imageViewBottomLabel.text = meme.bottomText
         return cell
     }
     
