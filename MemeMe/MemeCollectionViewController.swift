@@ -21,9 +21,9 @@ class MemeCollectionViewController: UIViewController, UICollectionViewDelegate, 
     func potraitOrientation() {
         let lineSpacing: CGFloat = 1.0
         let interItemSpacing: CGFloat = 1.0
-        let navBarHeight = self.navigationController?.navigationBar.frame.size.height
-        let width = (self.view.frame.size.width - (2 * interItemSpacing)) / 3.0
-        let height = (self.view.frame.size.height - (2 * lineSpacing) - (interItemSpacing) - (navBarHeight)!) / 4.0
+        let navBarHeight = navigationController?.navigationBar.frame.size.height
+        let width = (view.frame.size.width - (2 * interItemSpacing)) / 3.0
+        let height = (view.frame.size.height - (2 * lineSpacing) - (interItemSpacing) - (navBarHeight)!) / 4.0
 
         flowLayout.minimumInteritemSpacing = interItemSpacing
         flowLayout.minimumLineSpacing = lineSpacing

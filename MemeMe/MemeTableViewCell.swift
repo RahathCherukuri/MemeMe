@@ -9,18 +9,9 @@
 import UIKit
 
 class MemeTableViewCell: UITableViewCell {
-
     @IBOutlet weak var topLabel: UILabel!
     @IBOutlet weak var bottomLabel: UILabel!
     @IBOutlet weak var memeImageView: UIImageView!
     @IBOutlet weak var imageViewTopLabel: UILabel!
     @IBOutlet weak var imageViewBottomLabel: UILabel!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
 }

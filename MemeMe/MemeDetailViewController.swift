@@ -16,10 +16,10 @@ class MemeDetailViewController: UIViewController {
     var meme : Meme!
     
     override func viewDidLoad() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "EDIT", style: UIBarButtonItemStyle.Done, target: self, action: "startOver")
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "EDIT", style: UIBarButtonItemStyle.Done, target: self, action: "showEditorView")
     }
     
-    func startOver() {
+    func showEditorView() {
         if let navigationController = self.navigationController {
             let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! MemeEditorViewController
             navigationController.pushViewController(detailController, animated: true)
@@ -28,7 +28,7 @@ class MemeDetailViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.tabBarController?.tabBar.hidden = true
+        tabBarController?.tabBar.hidden = true
         imageView!.image = meme.originalImage
         imageViewTopText.text = meme.topText
         imageViewBottomText.text = meme.bottomText
@@ -36,6 +36,6 @@ class MemeDetailViewController: UIViewController {
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        self.tabBarController?.tabBar.hidden = false
+        tabBarController?.tabBar.hidden = false
     }
 }

@@ -39,7 +39,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         subscribeToKeyboardNotifications()
-        self.tabBarController?.tabBar.hidden = true
+        tabBarController?.tabBar.hidden = true
         if (!UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)) {
             camera.enabled = false
             shareButton.enabled = true
@@ -49,7 +49,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         unsubscribeFromKeyboardNotifications()
-        self.tabBarController?.tabBar.hidden = false
+        tabBarController?.tabBar.hidden = false
     }
     
     func setBarButtonsOnToolBar() {
@@ -100,7 +100,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         let memedImage: UIImage = generateMemedImage()
         let controller = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
         if (shareButton.enabled) {
-                self.presentViewController(controller, animated: true, completion: nil)
+                presentViewController(controller, animated: true, completion: nil)
             }
         controller.completionWithItemsHandler = {
             (activity: String?, completed: Bool, items: [AnyObject]?, error: NSError?) -> Void in
@@ -114,10 +114,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     @IBAction func cancel(sender: UIBarButtonItem) {
-//        setDefaultTextValues(topTextField)
-//        setDefaultTextValues(bottomTextField)
-//        imageView.image = nil
-        
         dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -150,8 +146,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         toolBar.hidden = true
         navigationBar.hidden = true
         
-        UIGraphicsBeginImageContext(self.view.frame.size)
-        self.view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
+        UIGraphicsBeginImageContext(view.frame.size)
+        view.drawViewHierarchyInRect(view.frame, afterScreenUpdates: true)
         let memedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         

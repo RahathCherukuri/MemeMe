@@ -12,11 +12,6 @@ class MemeTableViewController: UIViewController, UITableViewDelegate, UITableVie
     
     @IBOutlet weak var memeTableView: UITableView!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
-    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         memeTableView.reloadData()
@@ -24,7 +19,6 @@ class MemeTableViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Meme.memes.count
-//        return 2
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
