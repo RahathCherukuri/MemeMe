@@ -9,29 +9,15 @@
 import UIKit
 
 class MemeDetailViewController: UIViewController {
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var imageViewTopText: UILabel!
-    @IBOutlet weak var imageViewBottomText: UILabel!
-    
+    @IBOutlet weak var imageView: UIImageView!    
     var meme : Meme!
-    
-    override func viewDidLoad() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "EDIT", style: UIBarButtonItemStyle.Done, target: self, action: "showEditorView")
-    }
-    
-    func showEditorView() {
-        if let navigationController = self.navigationController {
-            let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! MemeEditorViewController
-            navigationController.pushViewController(detailController, animated: true)
-        }
-    }
+    var selectedIndex: Int!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.hidden = true
-        imageView!.image = meme.originalImage
-        imageViewTopText.text = meme.topText
-        imageViewBottomText.text = meme.bottomText
+        meme = Meme.memes[selectedIndex]
+        imageView!.image = meme.memedImage
     }
     
     override func viewWillDisappear(animated: Bool) {

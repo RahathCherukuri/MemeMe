@@ -97,6 +97,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     @IBAction func shareButtonAction(sender: UIBarButtonItem) {
         // Share button enabled.
+        topTextField.resignFirstResponder()
+        bottomTextField.resignFirstResponder()
         let memedImage: UIImage = generateMemedImage()
         let controller = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
         if (shareButton.enabled) {
