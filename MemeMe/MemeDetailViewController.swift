@@ -13,6 +13,18 @@ class MemeDetailViewController: UIViewController {
     var meme : Meme!
     var selectedIndex: Int!
     
+    override func viewDidLoad() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "EDIT", style: UIBarButtonItemStyle.Done, target: self, action: "showEditorView")
+    }
+    
+    func showEditorView() {
+        if let navigationController = self.navigationController {
+            let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! MemeEditorViewController
+            detailController.selectedIndex = selectedIndex
+            navigationController.pushViewController(detailController, animated: true)
+        }
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.hidden = true

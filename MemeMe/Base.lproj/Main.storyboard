@@ -202,6 +202,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="I9I-lQ-SYC">
+                        <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="8q1-bH-0qh" kind="relationship" relationship="rootViewController" id="FRd-Xu-han"/>
                     </connections>
@@ -318,7 +322,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Lv-mm-7a9">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="8Lv-mm-7a9">
                                 <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                                 <items>
                                     <barButtonItem width="90" style="plain" systemItem="fixedSpace" id="wOP-8x-3wl"/>
@@ -418,6 +422,6 @@
         <image name="TableImage" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="8bk-hx-Vci"/>
+        <segue reference="uCk-da-Dbd"/>
     </inferredMetricsTieBreakers>
 </document>

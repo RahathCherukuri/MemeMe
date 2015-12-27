@@ -22,6 +22,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var fixedSpaceMiddle: UIBarButtonItem!
     @IBOutlet weak var fixedSpaceRight: UIBarButtonItem!
     
+    var meme: Meme!
+    var selectedIndex: Int!
+    
     var imagePicker: UIImagePickerController!
     let textFieldDelegate = MemeTextFieldDelegate()
     
@@ -34,6 +37,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         setTextProperties(topTextField)
         setTextProperties(bottomTextField)
         setBarButtonsOnToolBar()
+        if (navigationController != nil && selectedIndex != nil) {
+            displayMeme()
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -50,6 +56,33 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         super.viewWillDisappear(animated)
         unsubscribeFromKeyboardNotifications()
         tabBarController?.tabBar.hidden = false
+    }
+    
+    func displayMeme() {
+        meme = Meme.memes[selectedIndex]
+        if (meme != nil) {
+            imageView.image = meme.originalImage
+            topTextField.text = meme.topText
+            bottomTextField.text = meme.bottomText
+        }
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.Done, target: self, action: "saveTheMeme")
+    }
+
+    func saveTheMeme() {
+        resignTextFieldsResponders()
+        let memedImg = generateMemedImage()
+        if ((topTextField.text != nil) && (bottomTextField.text != nil) && (imageView.image != nil)) {
+            Meme.memes[selectedIndex].topText = topTextField.text!
+            Meme.memes[selectedIndex].bottomText = bottomTextField.text!
+            Meme.memes[selectedIndex].originalImage = imageView.image!
+            Meme.memes[selectedIndex].memedImage = memedImg
+            navigationController?.popToRootViewControllerAnimated(true)
+        }
+    }
+    
+    func resignTextFieldsResponders() {
+        topTextField.resignFirstResponder()
+        bottomTextField.resignFirstResponder()
     }
     
     func setBarButtonsOnToolBar() {
@@ -96,9 +129,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     @IBAction func shareButtonAction(sender: UIBarButtonItem) {
-        // Share button enabled.
-        topTextField.resignFirstResponder()
-        bottomTextField.resignFirstResponder()
+        resignTextFieldsResponders()
         let memedImage: UIImage = generateMemedImage()
         let controller = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
         if (shareButton.enabled) {
@@ -127,6 +158,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             dismissViewControllerAnimated(true, completion: nil)
         }
     }
+    
     // Code for cropping the image will be used in part 2 of the project.
     func cropAnImage(let image: UIImage) {
         let croprect = CGRectMake(image.size.width/4, image.size.height/4, image.size.width/2, image.size.height/2)
