@@ -18,8 +18,8 @@ class MemeDetailViewController: UIViewController {
     }
     
     func showEditorView() {
-        if let navigationController = self.navigationController {
-            let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! MemeEditorViewController
+        if let navigationController = navigationController {
+            let detailController = storyboard!.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! MemeEditorViewController
             detailController.selectedIndex = selectedIndex
             navigationController.pushViewController(detailController, animated: true)
         }
